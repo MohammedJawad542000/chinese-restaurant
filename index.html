@@ -5,132 +5,71 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Golden Dragon - Chinese Restaurant</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Segoe UI', sans-serif;
-    }
-
-    body {
-      background-color: #fff8f0;
-      color: #333;
-    }
-
-    header {
-      background: #b22222;
-      padding: 15px 40px;
-      color: white;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: sticky;
-      top: 0;
-    }
-
-    header h1 {
-      font-size: 24px;
-    }
-
-    nav a {
-      color: white;
-      text-decoration: none;
-      margin-left: 20px;
-      font-weight: bold;
-    }
-
-    nav a:hover {
-      text-decoration: underline;
-    }
-
-    .hero {
-      height: 100vh;
-      background: url('https://images.unsplash.com/photo-1604908177442-3f59c2e9e0c1') center/cover no-repeat;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      color: white;
-      flex-direction: column;
-      padding: 20px;
-    }
-
-    .hero h2 {
-      font-size: 48px;
-      margin-bottom: 15px;
-      text-shadow: 2px 2px 5px black;
-    }
-
-    .hero p {
-      font-size: 20px;
-      margin-bottom: 30px;
-      text-shadow: 1px 1px 3px black;
-    }
-
-    .hero button {
-      padding: 12px 25px;
-      font-size: 18px;
-      background: #ffcc00;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      font-weight: bold;
-    }
-
-    .hero button:hover {
-      background: #ffb300;
-    }
-
-    .menu {
-      padding: 60px 40px;
-      text-align: center;
-    }
-
-    .menu h2 {
-      font-size: 36px;
-      margin-bottom: 30px;
-      color: #b22222;
-    }
-
-    .menu-items {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-    }
-
-    .dish {
-      background: white;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0px 2px 8px rgba(0,0,0,0.1);
-    }
-
-    .dish img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-      border-radius: 10px;
-    }
-
-    .dish h3 {
-      margin: 15px 0 10px;
-      font-size: 22px;
-      color: #333;
-    }
-
-    .dish p {
-      color: #666;
-    }
-
-    footer {
-      background: #b22222;
-      color: white;
-      text-align: center;
-      padding: 15px;
-      margin-top: 40px;
-    }
+    body { font-family: Arial, sans-serif; margin:0; background:#fff8f0; color:#333;}
+    header { background:#b22222; color:white; padding:15px 40px; display:flex; justify-content:space-between; align-items:center;}
+    nav a {color:white; text-decoration:none; margin-left:20px; font-weight:bold;}
+    nav a:hover { text-decoration: underline; }
+    .hero { height: 70vh; background:url('https://images.unsplash.com/photo-1604908177442-3f59c2e9e0c1') center/cover no-repeat; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; color:white; }
+    .hero h2 { font-size:48px; text-shadow:2px 2px 5px black;}
+    .hero p { font-size:20px; margin-bottom:20px; text-shadow:1px 1px 3px black;}
+    .form-section { padding:40px; background:white; max-width:600px; margin:40px auto; border-radius:10px; box-shadow:0px 2px 8px rgba(0,0,0,0.1);}
+    form label { display:block; margin:15px 0 5px;}
+    form input, form select { width:100%; padding:10px; border:1px solid #ccc; border-radius:5px;}
+    form button { margin-top:20px; padding:12px; background:#b22222; color:white; border:none; border-radius:5px; cursor:pointer; font-size:16px;}
+    form button:hover { background:#900;}
   </style>
 </head>
 <body>
   <header>
     <h1>Golden Dragon</h1>
+    <nav>
+      <a href="#form">Reserve</a>
+      <a href="#menu">Menu</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h2>Authentic Chinese Cuisine</h2>
+    <p>Reserve your table online</p>
+    <a href="#form"><button>Book Now</button></a>
+  </section>
+
+  <section class="form-section" id="form">
+    <h2>Reserve a Table</h2>
+    <form id="reservationForm">
+      <label>Name:</label>
+      <input type="text" name="name" required>
+
+      <label>Email:</label>
+      <input type="email" name="email" required>
+
+      <label>Number of Guests:</label>
+      <select name="guests" required>
+        <option value="2">2</option>
+        <option value="4">4</option>
+        <option value="6">6</option>
+      </select>
+
+      <label>Date:</label>
+      <input type="date" name="date" required>
+
+      <label>Time:</label>
+      <input type="time" name="time" required>
+
+      <button type="submit">Proceed to Payment</button>
+    </form>
+  </section>
+
+  <script>
+    document.getElementById("reservationForm").addEventListener("submit", function(e){
+      e.preventDefault();
+      // Save form data to localStorage
+      const formData = new FormData(this);
+      localStorage.setItem("reservation", JSON.stringify(Object.fromEntries(formData)));
+      // Redirect to payment page
+      window.location.href = "payment.html";
+    });
+  </script>
+</body>
+</html>
+
